@@ -13,6 +13,10 @@ const cardSchema = new Schema(
         required: true, 
         trim: true,
     },
+    tag: {
+      type: String,
+      trim: true,
+    },
     link: { 
         type: String, 
         trim: true,

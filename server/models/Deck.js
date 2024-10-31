@@ -8,6 +8,10 @@ const deckSchema = new Schema(
       required: true,
       trim: true,
     },
+    topic: {
+      type: String,
+      required: true,
+    },
     cards: [
       {
         type: Schema.Types.ObjectId,
