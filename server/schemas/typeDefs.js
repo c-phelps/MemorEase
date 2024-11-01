@@ -1,5 +1,5 @@
 // create typeDefs and export them
-const typeDefs =`
+const typeDefs = `
     type User {
         _id: ID
         username: String
@@ -10,6 +10,7 @@ const typeDefs =`
     type Deck {
         _id: ID
         deckname: String
+        topic: String
         cards: [Card]
     }
 
@@ -21,6 +22,12 @@ const typeDefs =`
     }
     
     type Query {
+        # decks
+        decks: [Deck]
+
+        # users
+        users: [User]
+
         # single user by id
         userByID(id: ID!): User
 
