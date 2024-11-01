@@ -1,9 +1,28 @@
 // set up resolvers and export them
 const Deck = require("../models/Deck");
 const User = require("../models/User");
+const Card = require("../models/Card");
 
-const resolver = {
+const resolvers = {
   Query: {
+    decks: async () => {
+      try {
+        const deck = await Deck.find({}).populate("cards");
+        return deck;
+      } catch (err) {
+        console.error(err);
+        throw new Error("Issue fetching Decks.");
+      }
+    },
+    users: async () => {
+      try {
+        const users = await User.find({}).populate("decks");
+        return users;
+      } catch (err) {
+        console.error(err);
+        throw new Error("Issue fetching Users.");
+      }
+    },
     userByID: async (parent, { id }) => {
       try {
         const user = await User.findById(id).populate("decks");
@@ -34,3 +53,5 @@ const resolver = {
     },
   },
 };
+
+module.exports = resolvers;
