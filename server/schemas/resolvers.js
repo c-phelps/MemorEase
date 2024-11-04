@@ -16,7 +16,13 @@ const resolvers = {
     },
     users: async () => {
       try {
-        const users = await User.find({}).populate("decks");
+        const users = await User.find({}).populate({
+          path: "decks",
+          populate: {
+            path: "cards", 
+            model: "Card", 
+          },
+        });
         return users;
       } catch (err) {
         console.error(err);
