@@ -1,14 +1,19 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom'; // Import useHistory
-import Flashcard from './Flashcard'; // Make sure to import the Flashcard component
-import Study from './Study'; // imports flashcard component
+import { useNavigate } from 'react-router-dom'; 
+import Flashcard from '../components/Flashcard';
+import Study from '../components/Study'; // imports flashcard component
 
-const Collection = ({ flashcards }) => {
+const Collection = () => {
         const navigate = useNavigate(); // Create a history instance
 
         const handleCreateDeck = () => {
             navigate('/Decks'); // Redirect to the Create Deck page
         }
+        const flashcards = [{
+            id:1,
+            question:"what is react",
+            answer:"a awesome tool"
+        }]
 
     return (
         <div className="collection">
