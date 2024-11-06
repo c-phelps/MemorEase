@@ -21,6 +21,11 @@ const typeDefs = `
         link: String
     }
     
+    type Auth {
+        token: ID!
+        user: User
+    }
+
     type Query {
         # decks
         decks: [Deck]
@@ -36,6 +41,14 @@ const typeDefs = `
 
         # single deck by id
         deckByID(id: ID!): Deck
+    }
+    
+    type Mutation {
+        # add user
+        addUser(username: String!, email: String!, password: String!): Auth
+
+        # login user    
+        login(username: String!, password: String!): Auth
     }
 `;
 

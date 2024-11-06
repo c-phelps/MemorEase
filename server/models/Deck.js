@@ -28,6 +28,10 @@ const deckSchema = new Schema(
   }
 );
 
+deckSchema.virtual('cardsCount').get(function () {
+  return this.cards.length;
+});
+
 const Deck = model("Deck", deckSchema);
 
 module.exports = Deck;

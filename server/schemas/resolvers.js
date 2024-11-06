@@ -2,6 +2,8 @@
 const Deck = require("../models/Deck");
 const User = require("../models/User");
 const Card = require("../models/Card");
+// call auth middleware
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -19,8 +21,8 @@ const resolvers = {
         const users = await User.find({}).populate({
           path: "decks",
           populate: {
-            path: "cards", 
-            model: "Card", 
+            path: "cards",
+            model: "Card",
           },
         });
         return users;
@@ -55,6 +57,39 @@ const resolvers = {
       } catch (err) {
         console.error(err);
         throw new Error("Issue fetching Deck by ID.");
+      }
+    },
+  },
+  Mutation: {
+    addUser: async (parent, { username, email, password }) => {
+      try {
+        const user = await User.create({ username, email, password });
+        const token = signToken(user);
+        return { token, user };
+      } catch (err) {
+        console.error(err);
+        throw new Error("Issue adding new user.");
+      }
+    },
+    login: async (parent, { username, password }) => {
+      try {
+        const user = await User.findOne({ username });
+
+        if (!user) {
+          throw new Error("Issue finding username");
+        }
+
+        const password = await user.isCorrectPassword(password);
+
+        if (!password) {
+          throw new Error("Incorrect password");
+        }
+
+        const token = signToken(user);
+        return { token, user };
+      } catch (err) {
+        console.error(err);
+        throw new Error("Issue adding new user.");
       }
     },
   },

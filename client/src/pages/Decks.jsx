@@ -3,14 +3,14 @@ import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { Box, Flex, Select, Text, Heading, UnorderedList, ListItem, Button } from "@chakra-ui/react";
 
-import { QUERY_GET_DECKS_BY_TOPIC } from "../utils/queries";
+import { DECKS_BY_TOPIC } from "../utils/queries";
 
 import { arrTopics } from "../utils/helpers";
 
 const Decks = () => {
   const [formState, setFormState] = useState({ topic: "" });
 
-  const { loading, error, data } = useQuery(QUERY_GET_DECKS_BY_TOPIC, {
+  const { loading, error, data } = useQuery(DECKS_BY_TOPIC, {
     variables: { topic: formState.topic },
     skip: !formState.topic,
   });
