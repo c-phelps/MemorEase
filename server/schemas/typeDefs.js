@@ -37,6 +37,15 @@ const typeDefs = `
         # single deck by id
         deckByID(id: ID!): Deck
     }
+
+    type Mutation {
+    
+    addDeck( userId: ID!, deckId: ID!): User
+    removeDeck(deckId: ID!): Deck
+    
+  }
 `;
+
+
 
 module.exports = typeDefs;
