@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useNavigate } from 'react-router-dom'; 
 import Flashcard from '../components/Flashcard';
@@ -14,6 +15,10 @@ const Collection = () => {
             question:"what is react",
             answer:"a awesome tool"
         }]
+
+
+const Collections = () => {
+    
 
     return (
         <div className="collection">
