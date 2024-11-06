@@ -4,6 +4,7 @@ import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import Collection from './pages/Collection';
 
 const client = new ApolloClient({
   uri: "/graphql",
