@@ -1,6 +1,5 @@
 // CJP Card model (question!/answer!/link)
-const { Schema, model } = require("mongoose");
-
+const { Schema, model } = require("mongoose"); 
 const cardSchema = new Schema(
   {
     question: {
