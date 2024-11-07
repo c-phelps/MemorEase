@@ -3,7 +3,7 @@ const Deck = require("../models/Deck");
 const User = require("../models/User");
 const Card = require("../models/Card");
 // call auth middleware
-const { signToken } = require('../utils/auth');
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -50,7 +50,7 @@ const resolvers = {
         throw new Error("Issue fetching Decks by topic.");
       }
     },
-    deckByID: async (parent, { id }) => {
+    deckById: async (parent, { id }) => {
       try {
         const deck = await Deck.findById(id).populate("cards");
         return deck;
@@ -73,23 +73,21 @@ const resolvers = {
     },
     login: async (parent, { username, password }) => {
       try {
-        const user = await User.findOne({ username });
-
+        const user = await User.findOne({ username: username });
         if (!user) {
-          throw new Error("Issue finding username");
+          throw new Error("Username not found.");
         }
 
-        const password = await user.isCorrectPassword(password);
-
-        if (!password) {
-          throw new Error("Incorrect password");
+        const isValidPassword = await user.isCorrectPassword(password);
+        if (!isValidPassword) {
+          throw new Error("Incorrect username or password");
         }
 
         const token = signToken(user);
         return { token, user };
       } catch (err) {
         console.error(err);
-        throw new Error("Issue adding new user.");
+        throw new Error("Issue logging in.");
       }
     },
   },

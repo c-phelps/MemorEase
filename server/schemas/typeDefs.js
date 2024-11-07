@@ -2,6 +2,7 @@
 const typeDefs = `
     type User {
         _id: ID
+        password: String
         username: String
         email: String
         decks: [Deck]
@@ -40,7 +41,7 @@ const typeDefs = `
         deckByTopic(topic: String!): [Deck]
 
         # single deck by id
-        deckByID(id: ID!): Deck
+        deckById(id: ID!): Deck
     }
     
     type Mutation {
