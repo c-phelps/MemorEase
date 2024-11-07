@@ -56,7 +56,15 @@ const typeDefs = `
 
         # Add deck to user
         addDeck (userId: ID!, deckId: ID!): User
+
+        # Delete deck
+        deleteDeck (deckId: ID!): Boolean
+
+        # Rename deck
+        renameDeck (deckId: ID!, newdeckname: String!): Deck
+        
     }
+
 `;
 
 module.exports = typeDefs;
