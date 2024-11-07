@@ -50,6 +50,12 @@ const typeDefs = `
 
         # login user    
         login(username: String!, password: String!): Auth
+
+        # create deck
+        creatDeck (deckname: String!, topic: String!): Deck
+
+        # Add deck to user
+        addDeck (userId: ID!, deckId: ID!): User
     }
 `;
 
