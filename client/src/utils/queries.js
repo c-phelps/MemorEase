@@ -15,3 +15,17 @@ export const DECKS_BY_TOPIC = gql`
     }
   }
 `;
+
+export const DECKS_BY_USER = gql`
+  query decksByUserID($userByIdId: ID!) {
+  userByID(id: $userByIdId) {
+    _id
+    username
+    decks {
+      _id
+      deckname
+      topic
+    }
+  }
+}
+`;

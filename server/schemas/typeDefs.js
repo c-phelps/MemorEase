@@ -2,6 +2,7 @@
 const typeDefs = `
     type User {
         _id: ID
+        password: String
         username: String
         email: String
         decks: [Deck]

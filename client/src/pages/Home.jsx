@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Box, Button, Center, Container, Heading, Image, Stack, Text } from "@chakra-ui/react";
 // import { Container, Row, Col, Button, Image, Stack } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import Auth from "../utils/auth";
 
 const Home = () => {
   console.log("Home component loaded");
@@ -9,8 +10,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    setIsLoggedIn(!!token);
+    setIsLoggedIn(Auth.loggedIn());
   }, []);
 
   return (
@@ -36,11 +36,11 @@ const Home = () => {
 
             <Box>
               {isLoggedIn ? (
-                <Button colorScheme="blue" onClick={() => navigate("/dashboard")}>
+                <Button colorScheme="blue" onClick={() => navigate("/decks")}>
                   Continue
                 </Button>
               ) : (
-                <Button colorScheme="teal" onClick={() => navigate("/login")}>
+                <Button colorScheme="teal" onClick={() => navigate("/signup")}>
                   Get Started
                 </Button>
               )}
