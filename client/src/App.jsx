@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom' ;
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import Footer from './components/Footer';
-import Navbar from './components/Navbar';
+import Navbar from './components/navbar';
 
 const client = new ApolloClient({
   uri: "/graphql",
