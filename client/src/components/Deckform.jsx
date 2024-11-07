@@ -1,86 +1,65 @@
-import { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import { useState } from "react";
+import { useMutation } from "@apollo/client";
 import { arrTopics } from "../utils/helpers.js";
-import {
-  Box,
-  Heading,
-  FormControl,
-  FormLabel,
-  Input,
-  Select,
-  Button,
-} from '@chakra-ui/react';
+import { Box, Heading, FormControl, FormLabel, Input, Select, Button } from "@chakra-ui/react";
 
-import { ADD_DECK } from '../../utils/mutations';
-import { QUERY_DECKS } from '../../utils/queries';
+import Auth from "../utils/auth";
 
-const DeckForm = () => {
+// import { ADD_DECK } from "../utils/mutations";
+// import { QUERY_DECKS } from "../utils/queries";
+
+const DeckForm = ({ isOpen, onClose }) => {
   const [formState, setFormState] = useState({
-    topic: '',
-    deckname: '',
+    topic: "",
+    deckname: "",
   });
 
-  const [addDeck, { error }] = useMutation(ADD_DECK, {
-    refetchQueries: [
-      QUERY_DECKS,
-      'getDecks'
-    ]
-  });
+  // const [addDeck, { error }] = useMutation(ADD_DECK, {
+  //   refetchQueries: [QUERY_DECKS, "getDecks"],
+  // });
 
-
- const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const { data } = await createDeck({
-        variables: { ...formState },
-      });
-      await addDeck({
-        variables: { userId: }
-      })
-      setFormState({
-        topic: '',
-        deckname: '',
-      });
-    } catch (err) {
-      console.error(err);
-    }
+  //   try {
+  //     const { data } = await createDeck({
+  //       variables: { ...formState },
+  //     });
+  //     await addDeck({
+  //       variables: { userId: Auth.getUser() },
+  //     });
+  //     setFormState({
+  //       topic: "",
+  //       deckname: "",
+  //     });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'topic' && name === 'deckname') {
+    if (name === "topic" && name === "deckname") {
       setFormState({ ...formState, [name]: value });
-      
-    } else  {
-      alert ("Please select a topic and Title");
+    } else {
+      alert("Please select a topic and Title");
     }
   };
 
-    return (
-        <Box
-      maxW="md"
-      mx="auto"
-      mt={10}
-      p={6}
-      borderWidth="1px"
-      borderRadius="lg"
-      bg="background.500"
-      >
+  return (
+    <Box maxW="md" mx="auto" mt={10} p={6} borderWidth="1px" borderRadius="lg" bg="background.500">
       <Heading mb={6} textAlign="center" fontSize="2xl" color="primary.500">
-        Create a study deck with topic and title
+        Create a Deck
       </Heading>
 
       <form onSubmit={handleSubmit}>
         <FormControl id="topic" isRequired>
           <FormLabel color="text.500">Choose a Topic</FormLabel>
           <Select placeholder="Select a topic" focusBorderColor="accent.500">
-             {arrTopics.map((topic) => (
-                <option>
-                  {topic}
-                </option>
-            ))}
+            {/* {arrTopics.map((topic) => (
+              <option>{topic}</option>]
+            ))} */}
           </Select>
         </FormControl>
 
@@ -102,7 +81,7 @@ const DeckForm = () => {
         </Button>
       </form>
     </Box>
-    )
-}
+  );
+};
 
-export default Decks;
+export default DeckForm;

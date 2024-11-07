@@ -1,34 +1,56 @@
-import React, { useEffect } from "react";
-import { Box, Button, Spacer, Heading, Stack, Text, ListItem, UnorderedList, Flex } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Button,
+  Spacer,
+  Heading,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Text,
+  ListItem,
+  UnorderedList,
+  Flex,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useNavigate, Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import Auth from "../utils/auth";
 import { DECKS_BY_USER } from "../utils/queries";
+import Deckform from "../components/Deckform";
 
 const Collection = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate(); // Create a history instance
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   // Redirect if not logged in
   useEffect(() => {
     if (!Auth.loggedIn()) {
+      setIsAuthenticated(false);
       navigate("/");
     }
   }, [navigate]);
 
-  const handleCreateDeck = () => {
-    navigate("/decks");
-  };
+  if (!isAuthenticated) {
+    return null;
+  }
 
   const user = Auth.getUser();
-  console.log(user)
+
+  if (!user) {
+    return <Text>Loading user data...</Text>; // Show loading message or spinner
+  }
+
   const { loading, error, data } = useQuery(DECKS_BY_USER, {
     variables: { userByIdId: user?._id },
     skip: !user,
-  });[]
+  });
 
   const decksByUser = data?.userByID.decks || [];
-  console.log(data);
-  console.log(error);
   return (
     <Box width="100%" px={4}>
       <Box width="100%" id="flexHeader">
@@ -37,7 +59,7 @@ const Collection = () => {
             Your Collection
           </Heading>
           <Spacer />
-          <Button colorScheme="teal" onClick={handleCreateDeck}>
+          <Button colorScheme="teal" onClick={onOpen}>
             Create New Deck
           </Button>
         </Flex>
@@ -64,6 +86,21 @@ const Collection = () => {
           </Box>
         </Flex>
       </Box>
+              {/* chakra ui to hold the modal for deck creation form */}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          {/* <ModalHeader>Create Deck</ModalHeader> */}
+          <ModalBody>
+            <Deckform />
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 };

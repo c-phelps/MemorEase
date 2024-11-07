@@ -50,7 +50,7 @@ const resolvers = {
         throw new Error("Issue fetching Decks by topic.");
       }
     },
-    deckByID: async (parent, { id }) => {
+    deckById: async (parent, { id }) => {
       try {
         const deck = await Deck.findById(id).populate("cards");
         return deck;

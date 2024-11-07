@@ -23,7 +23,7 @@ function Login(props) {
       Auth.login(token);
       navigate("/decks");
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 

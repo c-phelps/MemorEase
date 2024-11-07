@@ -41,7 +41,7 @@ const typeDefs = `
         deckByTopic(topic: String!): [Deck]
 
         # single deck by id
-        deckByID(id: ID!): Deck
+        deckById(id: ID!): Deck
     }
     
     type Mutation {

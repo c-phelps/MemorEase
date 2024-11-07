@@ -28,6 +28,9 @@ const Decks = () => {
 
   return (
     <Box width="100%" px={4}>
+      <Heading size="lg" mx="auto" textAlign="left">
+        Select a topic to study!
+      </Heading>
       <Select placeholder="Select a topic to study" onChange={handleChange} name="topic" mb={4}>
         {arrTopics.map((topic, index) => (
           <option key={index} value={topic}>
