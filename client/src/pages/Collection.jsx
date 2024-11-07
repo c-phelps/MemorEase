@@ -15,11 +15,6 @@ const Collection = () => {
             question:"what is react",
             answer:"a awesome tool"
         }]
-
-
-const Collections = () => {
-    
-
     return (
         <div className="collection">
             <h1>Collection</h1>
