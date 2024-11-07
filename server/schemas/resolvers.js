@@ -126,6 +126,31 @@ const resolvers = {
         throw new Error('Error adding deck to user: ' + error.message);
       }
     },
+    // Resolver for deleting a deck
+    deleteDeck: async (parent, { deckId }) => {
+      try {
+        const result = await Deck.findByIdAndDelete(deckId);
+        return result ? true : false;
+      } catch (error) {
+        throw new Error('Error deleting deck: ' + error.message);
+      }
+    },
+
+    // Resolver for renaming a deck
+    renameDeck: async (parent, { deckId, newdeckname }) => {
+      try {
+        const renameDeck = await Deck.findByIdAndUpdate(
+          deckId,
+          { deckname: newdeckname}
+        );
+        if (!renameDeck) {
+          throw new Error('Deck not found');
+        }
+        return renameDeck;
+      } catch (error) {
+        throw new Error('Error renaming deck: ' + error.message);
+      }
+    },
   },
 };
 
