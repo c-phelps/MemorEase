@@ -4,6 +4,7 @@ import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import Footer from './components/Footer';
 import Navbar from './components/navbar';
+import theme from './Theme';
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -14,7 +15,7 @@ function App() {
   console.log("App component loaded");
   return (
     <ApolloProvider client = {client}>
-      <ChakraProvider>
+      <ChakraProvider theme = {theme}>
         <Box width="100%" minH="100vh" bg="gray.50" p={4}>
           <Navbar />
           <Outlet />
