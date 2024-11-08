@@ -4,7 +4,7 @@
 MemorEase is an online learning tool designed to help users study and retain information by creating and reviewing digital flashcards. 
 Users can quickly create flashcards with questions, terms, or concepts on one side and corresponding answers or explanations on the other.
 Users can organize cards into decks for easy navigation. This helps learners structure their study materials for efficient review.
-MemorEase is accessible on both desktop and mobile devices, making it easy to study anytime, anywhere. Syncing across devices keeps progress up-to-date.
+MemorEase is accessible on both desktop and soon to be mobile devices, making it easy to study anytime, anywhere. Syncing across devices keeps progress up-to-date.
 
 ## Table of contents:
 - Reason
@@ -32,7 +32,7 @@ MemorEase is application aimed at boosting memory retention by using active reca
 - Vscode
 - Github
 - Render
-- Shakra UI
+- Chakra UI
 
 
 ## Prerequrisites Knowledge in:
