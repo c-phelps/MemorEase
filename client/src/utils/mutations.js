@@ -25,21 +25,46 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_DECK = gql`
-mutation CreateDeck($deckname: String!, $topic: String!) {
-  createDeck(deckname: $deckname, topic: $topic) {
-    _id
-    deckname
-    topic
-  }
-}
-`
-
-export const ADD_DECK_TO_USER = gql`mutation AddDeckToUser($userId: ID!, $deckId: ID!) {
-  addDeckToUser(userId: $userId, deckId: $deckId) {
-    _id
-    decks {
+  mutation CreateDeck($deckname: String!, $topic: String!) {
+    createDeck(deckname: $deckname, topic: $topic) {
       _id
+      deckname
+      topic
     }
   }
-}`
+`;
 
+export const ADD_DECK_TO_USER = gql`
+  mutation AddDeckToUser($userId: ID!, $deckId: ID!) {
+    addDeckToUser(userId: $userId, deckId: $deckId) {
+      _id
+      decks {
+        _id
+      }
+    }
+  }
+`;
+
+export const CREATE_CARD = gql`
+  mutation CreateCard($question: String!, $answer: String!, $link: String) {
+    createCard(question: $question, answer: $answer, link: $link) {
+      _id
+      answer
+      link
+      question
+    }
+  }
+`;
+
+export const ADD_CARD_TO_DECK = gql`
+  mutation AddCardToDeck($deckId: ID!, $cards: [String!]) {
+    addCardToDeck(deckId: $deckId, cards: $cards) {
+      deckname
+      topic
+      cards {
+        answer
+        question
+      }
+    }
+  }
+`;

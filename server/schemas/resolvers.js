@@ -139,13 +139,37 @@ const resolvers = {
     // Resolver for renaming a deck
     renameDeck: async (parent, { deckId, newdeckname }) => {
       try {
-        const renameDeck = await Deck.findByIdAndUpdate(deckId, { deckname: newdeckname });
+        const renameDeck = await Deck.findByIdAndUpdate({ _id: deckId }, { deckname: newdeckname }, { new: true });
         if (!renameDeck) {
           throw new Error("Deck not found");
         }
         return renameDeck;
       } catch (error) {
         throw new Error("Error renaming deck: " + error.message);
+      }
+    },
+    // create card resolver
+    createCard: async (parent, { question, answer, link }) => {
+      try {
+        const createCard = new Card({
+          question: question,
+          answer: answer,
+          link: link,
+        });
+
+        await createCard.save();
+        return createCard;
+      } catch (error) {
+        throw new Error("Error creating card: " + error.message);
+      }
+    },
+    // add array of card ID's to deck by deckId
+    addCardToDeck: async (parent, { deckId, cards }) => {
+      try {
+        const updatedDeck = await Deck.updateOne({ _id: deckId }, { $push: { cards: { $each: cards } } });
+        return await Deck.findById(deckId).populate("cards");
+      } catch (error) {
+        throw new Error("Error adding card to deck: " + error.message);
       }
     },
   },
