@@ -3,14 +3,14 @@ import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import { Box, Flex, Select, Text, Heading, UnorderedList, ListItem, Button } from "@chakra-ui/react";
 
-import { QUERY_GET_DECKS_BY_TOPIC } from "../utils/queries";
+import { DECKS_BY_TOPIC } from "../utils/queries";
 
 import { arrTopics } from "../utils/helpers";
 
 const Decks = () => {
   const [formState, setFormState] = useState({ topic: "" });
 
-  const { loading, error, data } = useQuery(QUERY_GET_DECKS_BY_TOPIC, {
+  const { loading, error, data } = useQuery(DECKS_BY_TOPIC, {
     variables: { topic: formState.topic },
     skip: !formState.topic,
   });
@@ -27,7 +27,10 @@ const Decks = () => {
   const decksByTopic = data?.deckByTopic || [];
 
   return (
-    <Box width="100%" px={4}>
+    <Box width="100%" px={4} minH="100vh">
+      <Heading size="lg" mx="auto" textAlign="left">
+        Select a topic to study!
+      </Heading>
       <Select placeholder="Select a topic to study" onChange={handleChange} name="topic" mb={4}>
         {arrTopics.map((topic, index) => (
           <option key={index} value={topic}>

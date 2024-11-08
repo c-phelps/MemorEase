@@ -2,6 +2,7 @@
 const typeDefs = `
     type User {
         _id: ID
+        password: String
         username: String
         email: String
         decks: [Deck]
@@ -21,6 +22,11 @@ const typeDefs = `
         link: String
     }
     
+    type Auth {
+        token: ID!
+        user: User
+    }
+
     type Query {
         # decks
         decks: [Deck]
@@ -35,8 +41,9 @@ const typeDefs = `
         deckByTopic(topic: String!): [Deck]
 
         # single deck by id
-        deckByID(id: ID!): Deck
+        deckById(id: ID!): Deck
     }
+<<<<<<< HEAD
 
     type Mutation {
     
@@ -44,6 +51,30 @@ const typeDefs = `
     removeDeck(deckId: ID!): Deck
     
   }
+=======
+    
+    type Mutation {
+        # add user
+        addUser(username: String!, email: String!, password: String!): Auth
+
+        # login user    
+        login(username: String!, password: String!): Auth
+
+        # create deck
+        createDeck (deckname: String!, topic: String!): Deck
+
+        # Add deck to user
+        addDeckToUser (userId: ID!, deckId: ID!): User
+
+        # Delete deck
+        deleteDeck (deckId: ID!): Boolean
+
+        # Rename deck
+        renameDeck (deckId: ID!, newdeckname: String!): Deck
+        
+    }
+
+>>>>>>> a4c0fefac46eb081acb5699ac078ceea6897c454
 `;
 
 

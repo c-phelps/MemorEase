@@ -3,10 +3,20 @@ const Deck = require("../models/Deck");
 const Card = require("../models/Card");
 const User = require("../models/User");
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const db = require('../config/connection');
 
 db.once('open', async () => {
   try {
+    // clear DB
+    await Card.deleteMany({});
+    await Deck.deleteMany({});
+    await User.deleteMany({});
+    
+    // hash the password before inserting
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash("password", saltRounds);
+
     const savedCard1 = await Card.create(card1);
     const savedCard2 = await Card.create(card2);
     const savedCard3 = await Card.create(card3);
