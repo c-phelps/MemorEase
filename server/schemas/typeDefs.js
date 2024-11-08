@@ -52,10 +52,10 @@ const typeDefs = `
         login(username: String!, password: String!): Auth
 
         # create deck
-        creatDeck (deckname: String!, topic: String!): Deck
+        createDeck (deckname: String!, topic: String!): Deck
 
         # Add deck to user
-        addDeck (userId: ID!, deckId: ID!): User
+        addDeckToUser (userId: ID!, deckId: ID!): User
 
         # Delete deck
         deleteDeck (deckId: ID!): Boolean
