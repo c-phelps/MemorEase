@@ -52,7 +52,7 @@ const Collection = () => {
 
   const decksByUser = data?.userByID.decks || [];
   return (
-    <Box width="100%" px={4}>
+    <Box width="100%" px={4} minH="100vh">
       <Box width="100%" id="flexHeader">
         <Flex align="center" width="100%">
           <Heading size="lg" mx="auto" textAlign="center">
@@ -86,7 +86,7 @@ const Collection = () => {
           </Box>
         </Flex>
       </Box>
-              {/* chakra ui to hold the modal for deck creation form */}
+      {/* chakra ui to hold the modal for deck creation form */}
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

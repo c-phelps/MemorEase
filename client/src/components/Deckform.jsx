@@ -4,47 +4,50 @@ import { arrTopics } from "../utils/helpers.js";
 import { Box, Heading, FormControl, FormLabel, Input, Select, Button } from "@chakra-ui/react";
 
 import Auth from "../utils/auth";
-
-// import { ADD_DECK } from "../utils/mutations";
-// import { QUERY_DECKS } from "../utils/queries";
+// mutations for our creation operations
+import { ADD_DECK_TO_USER, CREATE_DECK } from "../utils/mutations";
 
 const DeckForm = ({ isOpen, onClose }) => {
   const [formState, setFormState] = useState({
     topic: "",
     deckname: "",
   });
+  // get user id
+  const userId = Auth.getUser()._id;
 
-  // const [addDeck, { error }] = useMutation(ADD_DECK, {
-  //   refetchQueries: [QUERY_DECKS, "getDecks"],
-  // });
+  // mutations for createDeck and addDeckToUser
+  const [createDeck, { error_Create }] = useMutation(CREATE_DECK);
+  const [addToDeckUser, { error_Add }] = useMutation(ADD_DECK_TO_USER);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      const { data } = await createDeck({
+        variables: { ...formState },
+      });
 
-  //   try {
-  //     const { data } = await createDeck({
-  //       variables: { ...formState },
-  //     });
-  //     await addDeck({
-  //       variables: { userId: Auth.getUser() },
-  //     });
-  //     setFormState({
-  //       topic: "",
-  //       deckname: "",
-  //     });
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
+      await addToDeckUser({
+        variables: { userId: userId, deckId: data.createDeck._id },
+      });
+      
+      setFormState({
+        topic: "",
+        deckname: "",
+      });
+      
+    } catch (err) {
+      console.error(err);
+    }
   };
 
+  // adjust formstate on element change
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === "topic" && name === "deckname") {
-      setFormState({ ...formState, [name]: value });
-    } else {
-      alert("Please select a topic and Title");
-    }
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
 
   return (
@@ -56,16 +59,18 @@ const DeckForm = ({ isOpen, onClose }) => {
       <form onSubmit={handleSubmit}>
         <FormControl id="topic" isRequired>
           <FormLabel color="text.500">Choose a Topic</FormLabel>
-          <Select placeholder="Select a topic" focusBorderColor="accent.500">
-            {/* {arrTopics.map((topic) => (
-              <option>{topic}</option>]
-            ))} */}
+          <Select placeholder="Select a topic" name="topic" focusBorderColor="accent.500" onChange={handleChange}>
+            {arrTopics.map((topic, index) => (
+              <option key={index} value={topic}>
+                {topic}
+              </option>
+            ))}
           </Select>
         </FormControl>
 
         <FormControl id="deckname" isRequired mb={4}>
           <FormLabel color="text.500">Title</FormLabel>
-          <Input placeholder="Enter title" focusBorderColor="accent.500" />
+          <Input placeholder="Enter title" name="deckname" focusBorderColor="accent.500" onChange={handleChange} />
         </FormControl>
 
         <Button

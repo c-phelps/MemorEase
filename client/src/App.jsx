@@ -1,10 +1,10 @@
-import './App.css';
-import { Outlet } from 'react-router-dom' ;
-import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+import "./App.css";
+import { Outlet, useLocation } from "react-router-dom";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { ChakraProvider, Box } from "@chakra-ui/react";
-import Footer from './components/Footer';
-import Navbar from './components/navbar';
-import theme from './Theme';
+import Footer from "./components/Footer";
+import Navbar from "./components/navbar";
+import theme from "./Theme";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -12,12 +12,12 @@ const client = new ApolloClient({
 });
 
 function App() {
-  console.log("App component loaded");
+  const location = useLocation();
   return (
-    <ApolloProvider client = {client}>
-      <ChakraProvider theme = {theme}>
+    <ApolloProvider client={client}>
+      <ChakraProvider theme={theme}>
         <Box width="100%" minH="100vh" bg="gray.50" p={4}>
-          <Navbar />
+          {location.pathname !== "/" && location.pathname !== "/login" && location.pathname !== "/signup" && <Navbar />}
           <Outlet />
           <Footer />
         </Box>

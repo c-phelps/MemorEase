@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Button, Center, Container, Flex, Spacer, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Spacer } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import Auth from "../utils/auth";
 
@@ -9,41 +9,44 @@ const Navbar = () => {
 
   const toggleMenu = (location) => {
     setIsOpen(!isOpen);
-    navigate(location)
+
+    navigate(location);
   };
-  const logoutUser = () => {
+
+  const logoutUser = (location) => {
     Auth.logout();
+    setIsOpen(!isOpen);
+    navigate(location);
   };
 
   return (
-    <Box bg="gray.900" color="white" minH="100vh" p={3}>
+    <Box bg="gray.900" color="white" p={3}>
       <Flex align="center" maxW="1200px" mx="auto">
-    <nav className="navbar">
-      <div className="navbar-logo">
-        <Link to="/">MemorEase</Link>
-      </div>
-      <div className="navbar-toggle" onClick={toggleMenu}>
-        <span className="navbar-toggle-icon"></span>
-      </div>
-       {/* Spacer to push items to the right */}
-      <Spacer />
+        <nav className="navbar">
+          <div className="navbar-logo">
+            <Link to="/">MemorEase</Link>
+          </div>
+          <div className="navbar-toggle" onClick={toggleMenu}>
+            <span className="navbar-toggle-icon"></span>
+          </div>
+          <Spacer />
 
-      <div className={`navbar-links ${isOpen ? "open" : ""}`}>
-        <Flex gap={3}>
-         <Button colorScheme="blue" onClick={() => toggleMenu("/decks")}>
-          Decks
-         </Button>
-        <Button colorScheme="teal" onClick={() => toggleMenu("/collection")}>
-          Collection
-        </Button>
-        <Button colorScheme="blue" onClick={() => toggleMenu("/home")}>
-          Log Out 
-        </Button>
-        </Flex>
-      </div>
-    </nav>
-  </Flex>
-</Box>
+          <div className={`navbar-links ${isOpen ? "open" : ""}`}>
+            <Flex gap={3}>
+              <Button colorScheme="blue" onClick={() => toggleMenu("/decks")}>
+                Browse Decks
+              </Button>
+              <Button colorScheme="blue" onClick={() => toggleMenu("/collection")}>
+                My Collection
+              </Button>
+              <Button colorScheme="blue" onClick={() => logoutUser("/")}>
+                Log Out
+              </Button>
+            </Flex>
+          </div>
+        </nav>
+      </Flex>
+    </Box>
   );
 };
 

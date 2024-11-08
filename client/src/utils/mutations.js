@@ -24,4 +24,22 @@ export const LOGIN_USER = gql`
   }
 `;
 
+export const CREATE_DECK = gql`
+mutation CreateDeck($deckname: String!, $topic: String!) {
+  createDeck(deckname: $deckname, topic: $topic) {
+    _id
+    deckname
+    topic
+  }
+}
+`
+
+export const ADD_DECK_TO_USER = gql`mutation AddDeckToUser($userId: ID!, $deckId: ID!) {
+  addDeckToUser(userId: $userId, deckId: $deckId) {
+    _id
+    decks {
+      _id
+    }
+  }
+}`
 
