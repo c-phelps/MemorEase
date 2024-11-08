@@ -27,7 +27,7 @@ const Decks = () => {
   const decksByTopic = data?.deckByTopic || [];
 
   return (
-    <Box width="100%" px={4}>
+    <Box width="100%" px={4} minH="100vh">
       <Heading size="lg" mx="auto" textAlign="left">
         Select a topic to study!
       </Heading>
