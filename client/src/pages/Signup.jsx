@@ -37,44 +37,73 @@ const Signup = () => {
   };
 
   return (
-    <Box bg="black" color="white" minH="100vh" display="flex" alignItems="center">
+    <Box
+      bg="background.500" // Soft White background color
+      color="text.500" // Gunmetal text color for general text
+      minH="100vh"
+      py={12}
+      px={6}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
       <Container maxW="container.sm" centerContent>
-        <Image src="/path/to/logo.png" alt="Logo" boxSize="100px" mb={8} /> {/* example Logo as of now */}
-        <Heading as="h2" size="xl" mb={4}>
+        <Image src="/path/to/logo.png" alt="Logo" boxSize="100px" mb={8} />{' '}
+        {/* example Logo as of now */}
+        <Heading
+          as="h2"
+          size="xl"
+          mb={4}
+          color="primary.500"
+          textAlign="center"
+        >
           Signup
         </Heading>
         <Text fontSize="lg" mb={4}>
           Signup to start creating decks and study today!
         </Text>
-        <Box bg="gray.800" p={6} borderRadius="md" boxShadow="lg" width="full">
-          <Stack spacing={4}>
+        <Box
+          bg="white"
+          p={8}
+          borderRadius="md"
+          shadow="lg"
+          maxW="400px"
+          w="full"
+        >
+          <Stack spacing={6} align="stretch">
             <Input
-              placeholder="Username"
+              focusBorderColor="accent.500"
+              placeholder="Enter your username"
+              bg="background.500"
+              type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              variant="flushed"
-              borderColor="gray.600"
-              color="white"
             />
             <Input
-              placeholder="Email"
+              type="email"
+              focusBorderColor="accent.500"
+              placeholder="Enter your email"
+              bg="background.500"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              variant="flushed"
-              borderColor="gray.600"
-              color="white"
             />
             <Input
               type="password"
-              placeholder="Password"
+              focusBorderColor="accent.500"
+              placeholder="Enter your password"
+              bg="background.500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              variant="flushed"
-              borderColor="gray.600"
-              color="white"
             />
             {error && <Text color="red.500">{error.message}</Text>}
-            <Button colorScheme="teal" onClick={handleSignup} width="50" isLoading={isLoading}>
+            <Button
+              colorScheme="accent"
+              size="lg"
+              mt={4}
+              onClick={handleSignup}
+              width="50"
+              isLoading={isLoading}
+            >
               Signup!
             </Button>
             <Link to="/login">Already a user? Login instead!</Link>

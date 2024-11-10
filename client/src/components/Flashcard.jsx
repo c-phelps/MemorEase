@@ -9,7 +9,7 @@ const Flashcard = ({question, answer}) => {
         border="1px solid"
         borderColor="secondary.500"
         borderRadius="md"
-        p={4}
+        p={6}
         color="text.500"
         boxShadow="md"
         maxW="400px"

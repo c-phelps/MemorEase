@@ -30,7 +30,12 @@ const CardCreationModal = ({ deckTitle }) => {
 
   return (
     <>
-      <Button onClick={onOpen} bg="#5C6BC0" color="white">
+      <Button
+        onClick={onOpen}
+        focusBorderColor="accent.500"
+        bg="background.500"
+        size="lg"
+      >
         Create Deck
       </Button>
 
@@ -76,10 +81,15 @@ const CardCreationModal = ({ deckTitle }) => {
             </FormControl>
           </ModalBody>
           <ModalFooter justifyContent="space-between">
-            <Button colorScheme="teal" mr={3} onClick={handleAddCard} bg="#81C784" color="white">
+            <Button
+              mr={3}
+              onClick={handleAddCard}
+              colorScheme="accent"
+              size="lg"
+            >
               Add to Deck
             </Button>
-            <Button onClick={onClose} bg="#5C6BC0" color="white">
+            <Button onClick={onClose} colorScheme="accent.500" size="lg">
               Done
             </Button>
           </ModalFooter>

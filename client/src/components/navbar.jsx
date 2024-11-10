@@ -20,7 +20,7 @@ const Navbar = () => {
   };
 
   return (
-    <Box bg="scondary.500" color="text.500" p={3}>
+    <Box bg="primary.500" color="background.500" py={4} px={8} shadow="md">
       <Flex align="center" maxW="1200px" mx="auto">
         <nav className="navbar">
           <div className="navbar-logo">
@@ -31,15 +31,21 @@ const Navbar = () => {
           </div>
           <Spacer />
 
-          <div className={`navbar-links ${isOpen ? "open" : ""}`}>
+          <div className={`navbar-links ${isOpen ? 'open' : ''}`}>
             <Flex gap={3}>
-              <Button colorScheme="blue" onClick={() => toggleMenu("/decks")}>
+              <Button
+                onClick={() => toggleMenu('/decks')}
+              >
                 Browse Decks
               </Button>
-              <Button colorScheme="blue" onClick={() => toggleMenu("/collection")}>
+              <Button
+                onClick={() => toggleMenu('/collection')}
+              >
                 My Collection
               </Button>
-              <Button colorScheme="blue" onClick={() => logoutUser("/")}>
+              <Button
+                onClick={() => logoutUser('/')}
+              >
                 Log Out
               </Button>
             </Flex>

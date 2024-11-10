@@ -22,9 +22,34 @@ const theme = extendTheme({
   },
   styles: {
     global: {
-      body: {
-        bg: 'background.500',
+      // Global styles for the entire app
+      'html, body': {
+        backgroundColor: 'background.500',
         color: 'text.500',
+        fontFamily: 'Arial, sans-serif',
+      },
+      a: {
+        color: 'primary.500',
+        _hover: {
+          textDecoration: 'underline',
+        },
+      },
+    },
+  },
+  components: {
+    Button: {
+      // Customizing Chakra's Button component
+      baseStyle: {
+        fontWeight: 'bold',
+      },
+      variants: {
+        solid: {
+          bg: 'accent.500',
+          color: 'background.500',
+          _hover: {
+            bg: 'primary.500',
+          },
+        },
       },
     },
   },

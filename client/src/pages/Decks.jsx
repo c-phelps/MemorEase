@@ -27,11 +27,28 @@ const Decks = () => {
   const decksByTopic = data?.deckByTopic || [];
 
   return (
-    <Box width="100%" px={4} minH="100vh">
-      <Heading size="lg" mx="auto" textAlign="left">
+    <Box
+      bg="background.500" // Soft White background color
+      color="text.500" // Gunmetal text color for general text
+      minH="100vh"
+      py={12}
+      px={6}
+    >
+      <Heading
+        size="lg"
+        mx="auto"
+        color="primary.500"
+        textAlign="center"
+      >
         Select a topic to study!
       </Heading>
-      <Select placeholder="Select a topic to study" onChange={handleChange} name="topic" mb={4}>
+
+      <Select
+        placeholder="Select a topic to study"
+        onChange={handleChange}
+        name="topic"
+        mb={4}
+      >
         {arrTopics.map((topic, index) => (
           <option key={index} value={topic}>
             {topic}
@@ -46,13 +63,14 @@ const Decks = () => {
         <Heading size="md" mb={2}>
           Decks:
         </Heading>
+        
 
         <Flex justify="start">
           <Box p={2}>
             <UnorderedList styleType="none">
               {decksByTopic.map((deck) => (
                 <ListItem mb={2} key={deck._id}>
-                  <Button as={Link} to={`/decks/${deck._id}`} width="full">
+                  <Button as={Link} to={`/decks/${deck._id}`} width="full" >
                     {deck.deckname}
                   </Button>
                 </ListItem>

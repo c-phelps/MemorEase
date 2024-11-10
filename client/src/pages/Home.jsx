@@ -13,7 +13,16 @@ const Home = () => {
   }, []);
 
   return (
-    <Box bg="gray.900" color="white" minH="100vh">
+    <Box
+      bg="background.500" // Soft White background color
+      color="text.500" // Gunmetal text color
+      minH="100vh"
+      py={12}
+      px={6}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
       <Container maxW="80%" centerContent>
         <Box pos="absolute" top="5" left="5">
           <Image src="/path/to/logo.png" alt="Logo" boxSize="80px" />
@@ -22,19 +31,26 @@ const Home = () => {
         <Center minH="100vh">
           <Stack spacing={8} align="center" textAlign="center">
             <Box>
-              <Heading as="h2" size="xl">
+              <Heading as="h2" color="primary.500" size="2xl">
                 Welcome to MemorEase
               </Heading>
             </Box>
-            <Flex width="100%" direction={{ base: "column", md: "row" }} align="center">
+            <Flex
+              width="100%"
+              direction={{ base: 'column', md: 'row' }}
+              align="center"
+            >
               <Box flex="1" p={4} mr={{ base: 0, md: 8 }}>
-                <Text fontSize="lg" mt={4} textAlign="left">
-                  MemorEase is an online learning tool designed to help users study and retain information by creating
-                  and reviewing digital flashcards. Users can quickly create flashcards with questions, terms, or
-                  concepts on one side and corresponding answers or explanations on the other. Users can organize cards
-                  into decks for easy navigation. This helps learners structure their study materials for efficient
-                  review. MemorEase is accessible on desktop and soon will be available on mobile devices, making it
-                  easy to study anytime, anywhere!
+                <Text fontSize="lg" mt={4} textAlign="left" color="text.500">
+                  MemorEase is an online learning tool designed to help users
+                  study and retain information by creating and reviewing digital
+                  flashcards. Users can quickly create flashcards with
+                  questions, terms, or concepts on one side and corresponding
+                  answers or explanations on the other. Users can organize cards
+                  into decks for easy navigation. This helps learners structure
+                  their study materials for efficient review. MemorEase is
+                  accessible on desktop and soon will be available on mobile
+                  devices, making it easy to study anytime, anywhere!
                 </Text>
               </Box>
               <Box flex="1" p={4}>
@@ -52,11 +68,21 @@ const Home = () => {
 
             <Box>
               {isLoggedIn ? (
-                <Button colorScheme="blue" onClick={() => navigate("/decks")}>
+                <Button
+                  colorScheme="accent"
+                  size="lg"
+                  onClick={() => navigate('/decks')}
+                >
                   Continue
                 </Button>
               ) : (
-                <Button colorScheme="teal" onClick={() => navigate("/signup")}>
+                <Button
+                  variant="outline"
+                  color="primary.500"
+                  borderColor="primary.500"
+                  _hover={{ bg: 'accent.500', color: 'background.500' }}
+                  onClick={() => navigate('/signup')}
+                >
                   Get Started
                 </Button>
               )}

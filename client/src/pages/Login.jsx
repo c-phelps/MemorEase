@@ -36,39 +36,68 @@ function Login(props) {
   };
 
   return (
-    <Box bg="black" color="white" minH="100vh" display="flex" alignItems="center">
+    <Box
+      bg="background.500" // Soft White background color
+      color="text.500" // Gunmetal text color for general text
+      minH="100vh"
+      py={12}
+      px={6}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
       <Container maxW="container.sm" centerContent>
         <Image src="/logo.png" alt="Logo" boxSize="100px" mb={8} />
-        <Heading as="h2" size="xl" mb={4}>
+        <Heading
+          as="h2"
+          size="xl"
+          mb={4}
+          color="primary.500"
+          textAlign="center"
+        >
           Login
         </Heading>
         <Text fontSize="lg" mb={4}>
           Login to manage your decks and start studying!
         </Text>
-        <Box bg="gray.800" p={6} borderRadius="md" boxShadow="lg" width="full">
+        <Box
+          bg="white"
+          p={8}
+          borderRadius="md"
+          shadow="lg"
+          maxW="400px"
+          w="full"
+        >
           <Stack spacing={4}>
             <Input
-              placeholder="Username"
+              placeholder="Enter your username"
               name="username"
               type="text"
               value={formState.username}
               onChange={handleChange}
-              variant="flushed"
-              borderColor="gray.600"
-              color="white"
+              focusBorderColor="accent.500"
+              bg="background.500"
             />
             <Input
-              placeholder="Password"
+              placeholder="Enter your password"
               name="password"
               type="password"
               value={formState.password}
               onChange={handleChange}
-              variant="flushed"
-              borderColor="gray.600"
-              color="white"
+              focusBorderColor="accent.500"
+              bg="background.500"
             />
-            {error && <Text color="red.500">The provided credentials are incorrect.</Text>}
-            <Button colorScheme="teal" onClick={handleFormSubmit} width="full">
+            {error && (
+              <Text color="red.500">
+                The provided credentials are incorrect.
+              </Text>
+            )}
+            <Button
+              colorScheme="accent"
+              size="lg"
+              onClick={handleFormSubmit}
+              width="full"
+            >
               Login
             </Button>
             <Link to="/signup">Don't have an account? Sign up here.</Link>
