@@ -21,13 +21,8 @@ const resolvers = {
         const users = await User.find({}).populate({
           path: 'decks',
           populate: {
-<<<<<<< HEAD
-            path: 'cards',
-            model: 'Card',
-=======
             path: "cards",
             model: "Card",
->>>>>>> a4c0fefac46eb081acb5699ac078ceea6897c454
           },
         });
         return users;
@@ -66,21 +61,6 @@ const resolvers = {
     },
   },
   Mutation: {
-<<<<<<< HEAD
-    addDeck: async (parent, { userId, deckId }) => { 
-      try {
-        return User.findOneAndUpdate(
-          { _id: userId },
-          { $addToSet: { decks: deckId } }, 
-          { new: true, runValidators: true}
-        )
-      } catch (err) {
-        console.error(err);
-        throw new Error('Issue adding deck.');
-      }
-    },
-    
-=======
     addUser: async (parent, { username, email, password }) => {
       try {
         const user = await User.create({ username, email, password });
@@ -168,7 +148,6 @@ const resolvers = {
         throw new Error("Error renaming deck: " + error.message);
       }
     },
->>>>>>> a4c0fefac46eb081acb5699ac078ceea6897c454
   },
 };
 

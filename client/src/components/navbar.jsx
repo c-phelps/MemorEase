@@ -20,7 +20,7 @@ const Navbar = () => {
   };
 
   return (
-    <Box bg="gray.900" color="white" p={3}>
+    <Box bg="scondary.500" color="text.500" p={3}>
       <Flex align="center" maxW="1200px" mx="auto">
         <nav className="navbar">
           <div className="navbar-logo">

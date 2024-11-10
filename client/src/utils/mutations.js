@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import { gql } from '@apollo/client';
-
-export const ADD_DECK = gql`
-  mutation AddDeck($userId: ID!, $deckId: ID!) {
-    addDeck(userId: $userId, deckId: $deckId) {
-      _id
-      username
-      email
-      decks {
-        _id
-        deckname
-        topic
-=======
 import { gql } from "@apollo/client";
 
 export const ADD_USER = gql`
@@ -21,13 +7,10 @@ export const ADD_USER = gql`
       user {
         _id
         username
->>>>>>> a4c0fefac46eb081acb5699ac078ceea6897c454
       }
     }
   }
 `;
-<<<<<<< HEAD
-=======
 
 export const LOGIN_USER = gql`
   mutation Login($username: String!, $password: String!) {
@@ -60,4 +43,3 @@ export const ADD_DECK_TO_USER = gql`mutation AddDeckToUser($userId: ID!, $deckId
   }
 }`
 
->>>>>>> a4c0fefac46eb081acb5699ac078ceea6897c454
