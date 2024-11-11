@@ -13,6 +13,7 @@ const typeDefs = `
         deckname: String
         topic: String
         cards: [Card]
+        cardsCount: Int
     }
 
     type Card {
@@ -43,22 +44,13 @@ const typeDefs = `
         # single deck by id
         deckById(id: ID!): Deck
     }
-<<<<<<< HEAD
-
-    type Mutation {
-    
-    addDeck( userId: ID!, deckId: ID!): User
-    removeDeck(deckId: ID!): Deck
-    
-  }
-=======
     
     type Mutation {
         # add user
-        addUser(username: String!, email: String!, password: String!): Auth
+        addUser (username: String!, email: String!, password: String!): Auth
 
         # login user    
-        login(username: String!, password: String!): Auth
+        login (username: String!, password: String!): Auth
 
         # create deck
         createDeck (deckname: String!, topic: String!): Deck
@@ -72,9 +64,16 @@ const typeDefs = `
         # Rename deck
         renameDeck (deckId: ID!, newdeckname: String!): Deck
         
+        # Edit deck
+        editDeck (deckId: ID!, deckname: String!, topic: String!): Deck
+
+        # create card
+        createCard (question: String!, answer: String!, link: String): Card
+
+        # add card to deck
+        addCardToDeck (deckId: ID!, cards: [String!]): Deck
     }
 
->>>>>>> a4c0fefac46eb081acb5699ac078ceea6897c454
 `;
 
 

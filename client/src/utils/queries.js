@@ -6,6 +6,7 @@ export const DECKS_BY_TOPIC = gql`
       _id
       deckname
       topic
+      cardsCount
       cards {
         _id
         question
@@ -24,6 +25,7 @@ export const DECKS_BY_USER = gql`
       decks {
         _id
         deckname
+        cardsCount
         topic
       }
     }

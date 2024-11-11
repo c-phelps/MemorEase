@@ -42,7 +42,7 @@ const StudyPage = () => {
       p={6}
       color="text.500"
       boxShadow="md"
-      maxW="400px"
+      // maxW="400px"
     >
       <Center>
         <Heading mb={6}>Study Page</Heading>
@@ -53,7 +53,7 @@ const StudyPage = () => {
             <Box
               spacing={4}
               p={6}
-              border="1px solid white"
+              border="1px solid black"
               borderRadius="md"
               minW="600px"
               minH="200px"
@@ -61,7 +61,7 @@ const StudyPage = () => {
               onClick={handleCardClick}
               cursor="pointer"
               position="relative"
-              _hover={{ bg: 'gray.700' }}
+              _hover={{ bg: 'gray.200' }}
               bgImage="url('https://your-image-url.com/flashcard-bg.jpg')"
               bgSize="cover"
               bgPosition="center"
@@ -86,7 +86,7 @@ const StudyPage = () => {
                   position="absolute"
                   bottom="10px"
                   left="10px"
-                  color="white"
+                  color="black"
                   boxSize={6}
                 />
               ) : (
@@ -94,7 +94,7 @@ const StudyPage = () => {
                   position="absolute"
                   bottom="10px"
                   right="10px"
-                  color="white"
+                  color="black"
                   boxSize={6}
                 />
               )}

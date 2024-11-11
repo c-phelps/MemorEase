@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
-import { Box, Flex, Select, Text, Heading, UnorderedList, ListItem, Button } from "@chakra-ui/react";
+import { Box, Flex, Select, Text, Heading, UnorderedList, ListItem, Button, Spacer } from "@chakra-ui/react";
 
 import { DECKS_BY_TOPIC } from "../utils/queries";
 
@@ -13,6 +13,7 @@ const Decks = () => {
   const { loading, error, data } = useQuery(DECKS_BY_TOPIC, {
     variables: { topic: formState.topic },
     skip: !formState.topic,
+    fetchPolicy: "network-only",
   });
 
   const handleChange = (event) => {
@@ -60,19 +61,28 @@ const Decks = () => {
         {loading && <Text>Loading...</Text>}
         {error && <Text color="red.500">Error: {error.message}</Text>}
 
-        <Heading size="md" mb={2}>
-          Decks:
+        <Heading size="md" mb={2} textAlign="left">
+          Deck name
         </Heading>
-        
-
-        <Flex justify="start">
+        <Spacer />
+        <Flex justify="start" align="center" width="full">
           <Box p={2}>
-            <UnorderedList styleType="none">
+            <UnorderedList styleType="none" ml={0}>
               {decksByTopic.map((deck) => (
                 <ListItem mb={2} key={deck._id}>
-                  <Button as={Link} to={`/decks/${deck._id}`} width="full" >
-                    {deck.deckname}
-                  </Button>
+                  <Flex align="center" width="full" justify="space-between">
+                    <Button as={Link} to={`/decks/${deck._id}`} width="100%" minWidth="200px" mr={2}>
+                      {deck.deckname}
+                    </Button>
+                    <Flex align="center" ml={2}>
+                      <Text size="sm" display="inline">
+                        {deck.cardsCount}
+                      </Text>
+                      <Text size="sm" display="inline" ml={1}>
+                        cards
+                      </Text>
+                    </Flex>
+                  </Flex>
                 </ListItem>
               ))}
             </UnorderedList>

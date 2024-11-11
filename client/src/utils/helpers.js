@@ -1,5 +1,4 @@
 export const arrTopics = [
-    "Test subject",
     "General Knowledge and Trivia",
     "Academics and Education",
     "Business and Economics",
