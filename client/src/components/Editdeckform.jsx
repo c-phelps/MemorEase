@@ -17,7 +17,7 @@ import {
   ModalFooter,
 } from "@chakra-ui/react";
 
-import Cardform from "./CardForm";
+import Cardform from "./Cardform";
 import Auth from "../utils/auth.js";
 // mutations for our creation operations
 import { EDIT_DECK } from "../utils/mutations.js";
