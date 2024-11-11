@@ -46,28 +46,19 @@ function Login(props) {
       alignItems="center"
       justifyContent="center"
     >
+      <Box pos="absolute" top="5" left="5">
+        <Link href="/">
+          <Image src="/logo.png" alt="Logo" boxSize="40px" objectFit="contain" />
+        </Link>
+      </Box>
       <Container maxW="container.sm" centerContent>
-        <Image src="/logo.png" alt="Logo" boxSize="100px" mb={8} />
-        <Heading
-          as="h2"
-          size="xl"
-          mb={4}
-          color="primary.500"
-          textAlign="center"
-        >
+        <Heading as="h2" size="xl" mb={4} color="primary.500" textAlign="center">
           Login
         </Heading>
         <Text fontSize="lg" mb={4}>
           Login to manage your decks and start studying!
         </Text>
-        <Box
-          bg="white"
-          p={8}
-          borderRadius="md"
-          shadow="lg"
-          maxW="400px"
-          w="full"
-        >
+        <Box bg="white" p={8} borderRadius="md" shadow="lg" maxW="400px" w="full">
           <Stack spacing={4}>
             <Input
               placeholder="Enter your username"
@@ -87,17 +78,8 @@ function Login(props) {
               focusBorderColor="accent.500"
               bg="background.500"
             />
-            {error && (
-              <Text color="red.500">
-                The provided credentials are incorrect.
-              </Text>
-            )}
-            <Button
-              colorScheme="accent"
-              size="lg"
-              onClick={handleFormSubmit}
-              width="full"
-            >
+            {error && <Text color="red.500">The provided credentials are incorrect.</Text>}
+            <Button colorScheme="accent" size="lg" onClick={handleFormSubmit} width="full">
               Login
             </Button>
             <Link to="/signup">Don't have an account? Sign up here.</Link>

@@ -136,6 +136,9 @@ const Collection = () => {
       p={6}
       color="text.500"
       boxShadow="md"
+      height="100%"
+      minH="100vh"
+      maxW="100vw"
     >
       <Box width="100%" id="flexHeader">
         <Flex align="center" width="100%">

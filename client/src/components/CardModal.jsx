@@ -22,7 +22,6 @@ const CardCreationModal = ({ deckTitle }) => {
   const [link, setLink] = useState('');
 
   const handleAddCard = () => {
-    console.log('Card added:', { question, answer, link });
     setQuestion('');
     setAnswer('');
     setLink('');

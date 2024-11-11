@@ -35,14 +35,14 @@ const StudyPage = () => {
 
   return (
     <Box
+      height="100%"
+      minH="80vh"
       bg="background.500"
       border="1px solid"
       borderColor="secondary.500"
-      borderRadius="md"
       p={6}
       color="text.500"
       boxShadow="md"
-      // maxW="400px"
     >
       <Center>
         <Heading mb={6}>Study Page</Heading>
@@ -55,48 +55,34 @@ const StudyPage = () => {
               p={6}
               border="1px solid black"
               borderRadius="md"
-              minW="600px"
-              minH="200px"
+              minW="800px"
+              minH="400px"
               textAlign="left"
               onClick={handleCardClick}
               cursor="pointer"
+              bg="gray.200"
               position="relative"
-              _hover={{ bg: 'gray.200' }}
-              bgImage="url('https://your-image-url.com/flashcard-bg.jpg')"
+              _hover={{
+                border: "3px solid black",
+                bg: "gray.300",
+              }}
+              // bgImage="/flashcard.png"
               bgSize="cover"
               bgPosition="center"
               bgRepeat="no-repeat"
             >
               <Text fontSize="lg">
-                {showAnswer
-                  ? flashcards[currentIndex].answer
-                  : flashcards[currentIndex].question}
+                {showAnswer ? flashcards[currentIndex].answer : flashcards[currentIndex].question}
               </Text>
               {showAnswer && flashcards[currentIndex].link && (
-                <Link
-                  href={flashcards[currentIndex].link}
-                  color="teal.300"
-                  isExternal
-                >
+                <Link href={flashcards[currentIndex].link} color="teal.300" isExternal>
                   More Info
                 </Link>
               )}
               {showAnswer ? (
-                <ArrowBackIcon
-                  position="absolute"
-                  bottom="10px"
-                  left="10px"
-                  color="black"
-                  boxSize={6}
-                />
+                <ArrowBackIcon position="absolute" bottom="10px" left="10px" color="black" boxSize={6} />
               ) : (
-                <ArrowForwardIcon
-                  position="absolute"
-                  bottom="10px"
-                  right="10px"
-                  color="black"
-                  boxSize={6}
-                />
+                <ArrowForwardIcon position="absolute" bottom="10px" right="10px" color="black" boxSize={6} />
               )}
             </Box>
           </Center>
@@ -105,9 +91,7 @@ const StudyPage = () => {
           </Button>
         </VStack>
       )}
-      {flashcards.length === 0 && (
-        <Text>No flashcards available for this deck.</Text>
-      )}
+      {flashcards.length === 0 && <Text>No flashcards available for this deck.</Text>}
     </Box>
   );
 };

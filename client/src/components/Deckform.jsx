@@ -28,7 +28,6 @@ const DeckForm = ({ onComplete }) => {
       // retrieve the new deck id
       const newDeckId = data.createDeck._id;
       const newDeckName = data.createDeck.deckname;
-
       await addToDeckUser({
         variables: { userId: userId, deckId: newDeckId },
       });
@@ -61,7 +60,12 @@ const DeckForm = ({ onComplete }) => {
       <form onSubmit={handleSubmit}>
         <FormControl id="topic" isRequired>
           <FormLabel color="text.500">Choose a Topic</FormLabel>
-          <Select name="topic" focusBorderColor="accent.500" onChange={handleChange}>
+          <Select
+            name="topic"
+            placeholder="Select a topic to study"
+            focusBorderColor="accent.500"
+            onChange={handleChange}
+          >
             {arrTopics.map((topic, index) => (
               <option key={index} value={topic}>
                 {topic}

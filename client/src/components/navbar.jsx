@@ -1,56 +1,83 @@
 import { useState } from "react";
-import { Box, Button, Flex, Spacer } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Box, Image, Flex, Heading } from "@chakra-ui/react";
+import { Link as RouterLink, useNavigate, useLocation } from "react-router-dom";
 import Auth from "../utils/auth";
 
 const Navbar = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  const toggleMenu = (location) => {
+  const toggleMenu = (destination) => {
     setIsOpen(!isOpen);
 
-    navigate(location);
+    navigate(destination);
   };
 
-  const logoutUser = (location) => {
+  const logoutUser = (destination) => {
     Auth.logout();
     setIsOpen(!isOpen);
-    navigate(location);
+    navigate(destination);
   };
 
   return (
     <Box bg="primary.500" color="background.500" py={4} px={8} shadow="md">
-      <Flex align="center" maxW="1200px" mx="auto">
-        <nav className="navbar">
-          <div className="navbar-logo">
-            <Link to="/">MemorEase</Link>
-          </div>
-          <div className="navbar-toggle" onClick={toggleMenu}>
-            <span className="navbar-toggle-icon"></span>
-          </div>
-          <Spacer />
+      <Flex align="center" justify="space-between" mx="auto" id="flexStart">
+        <Flex align="center" gap={3}>
+          <Link href="/">
+            <Image src="/logo.png" alt="Logo" boxSize="40px" objectFit="contain" />
+          </Link>
+          <Heading as="h1" size="lg" fontWeight="bold">
+            MemorEase
+          </Heading>
+        </Flex>
 
-          <div className={`navbar-links ${isOpen ? 'open' : ''}`}>
-            <Flex gap={3}>
-              <Button
-                onClick={() => toggleMenu('/decks')}
-              >
-                Browse Decks
-              </Button>
-              <Button
-                onClick={() => toggleMenu('/collection')}
-              >
-                My Collection
-              </Button>
-              <Button
-                onClick={() => logoutUser('/')}
-              >
-                Log Out
-              </Button>
-            </Flex>
-          </div>
-        </nav>
+        <div className="navbar-toggle" onClick={toggleMenu}>
+          <span className="navbar-toggle-icon"></span>
+        </div>
+
+        <div className={`navbar-links ${isOpen ? "open" : ""}`}>
+          <Flex bg="accent.500" justify="flex-end">
+            <Link
+              as={RouterLink}
+              to="/decks"
+              onClick={() => toggleMenu("/decks")}
+              textAlign="center"
+              p={2}
+              bg={location.pathname === "/decks" ? "primary.500" : "transparent"}
+              borderTop={location.pathname === "/decks" ? "3px solid black" : "none"}
+              borderRight={location.pathname === "/decks" ? "3px solid black" : "none"}
+              borderLeft={location.pathname === "/decks" ? "3px solid black" : "none"}
+              borderBottom={location.pathname === "/decks" ? "none" : "3px solid black"}
+            >
+              Browse Decks
+            </Link>
+            <Link
+              as={RouterLink}
+              to="/collection"
+              onClick={() => toggleMenu("/collection")}
+              textAlign="center"
+              p={2}
+              bg={location.pathname === "/collection" ? "primary.500" : "transparent"}
+              borderTop={location.pathname === "/collection" ? "3px solid black" : "none"}
+              borderRight={location.pathname === "/collection" ? "3px solid black" : "none"}
+              borderLeft={location.pathname === "/collection" ? "3px solid black" : "none"}
+              borderBottom={location.pathname === "/collection" ? "none" : "3px solid black"}
+            >
+              My Collection
+            </Link>
+            <Link
+              as={RouterLink}
+              to="/"
+              onClick={() => logoutUser("/")}
+              textAlign="center"
+              p={2}
+              borderBottom="3px solid black"
+            >
+              Log Out
+            </Link>
+          </Flex>
+        </div>
       </Flex>
     </Box>
   );
