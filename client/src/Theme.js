@@ -2,25 +2,59 @@
 import { extendTheme } from "@chakra-ui/react";
 
 //2. Theme object containing custom styling
-const themes = {
-    styles: {
-      global: {
-        'html, body': {
-          backgroundColor: 'hsl(225, 100%, 94%)',
-          fontFamily: `'Red Hat Display', sans-serif`,
-        },
-        a: {
-          color: 'hsl(245, 75%, 52%)',
-        },
-        h1: {
-          color: 'hsl(245, 75%, 52%)',
-          fontSize: '64px',
-           lineHeight: '80px',
+const theme = extendTheme({
+  colors: {
+    primary: {
+      500: '#5C6BC0', // Indigo
+    },
+    secondary: {
+      500: '#90A4AE', // Steel Gray
+    },
+    accent: {
+      500: '#81C784', // Seafoam
+    },
+    text: {
+      500: '#263238', // Gunmetal
+    },
+    background: {
+      500: '#FAFAFA', // Soft White
+    },
+  },
+  styles: {
+    global: {
+      // Global styles for the entire app
+      'html, body': {
+        backgroundColor: 'background.500',
+        color: 'text.500',
+        fontFamily: 'Arial, sans-serif',
+      },
+      a: {
+        color: 'primary.500',
+        _hover: {
+          textDecoration: 'underline',
         },
       },
     },
-  }
+  },
+  components: {
+    Button: {
+      // Customizing Chakra's Button component
+      baseStyle: {
+        fontWeight: 'bold',
+      },
+      variants: {
+        solid: {
+          bg: 'accent.500',
+          color: 'background.500',
+          _hover: {
+            bg: 'primary.500',
+          },
+        },
+      },
+    },
+  },
+});
+
   //3. Export theme
-  const theme = extendTheme(themes);
   export default theme;
 

@@ -1,4 +1,4 @@
-import "./App.css";
+//import "./App.css";
 import { Outlet, useLocation } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { ChakraProvider, Box } from "@chakra-ui/react";

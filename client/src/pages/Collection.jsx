@@ -65,7 +65,7 @@ const Collection = () => {
   const resetFormState = () => {
     setDeckId(null);
     setDeckName("");
-    setDeckComplete(false);    
+    setDeckComplete(false);
     refetch();
   };
 
@@ -128,7 +128,15 @@ const Collection = () => {
 
   const decksByUser = data?.userByID.decks || [];
   return (
-    <Box width="100%" px={4} minH="100vh">
+    <Box
+      bg="background.500"
+      border="1px solid"
+      borderColor="secondary.500"
+      borderRadius="md"
+      p={6}
+      color="text.500"
+      boxShadow="md"
+    >
       <Box width="100%" id="flexHeader">
         <Flex align="center" width="100%">
           <Heading size="lg" mx="auto" textAlign="center">
