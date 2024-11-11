@@ -7,7 +7,7 @@ import Auth from "../utils/auth";
 // mutations for our creation operations
 import { ADD_DECK_TO_USER, CREATE_DECK } from "../utils/mutations";
 
-const DeckForm = ({ isOpen, onClose }) => {
+const DeckForm = ({ onComplete }) => {
   const [formState, setFormState] = useState({
     topic: "",
     deckname: "",
@@ -25,18 +25,20 @@ const DeckForm = ({ isOpen, onClose }) => {
       const { data } = await createDeck({
         variables: { ...formState },
       });
+      // retrieve the new deck id
+      const newDeckId = data.createDeck._id;
+      const newDeckName = data.createDeck.deckname;
 
       await addToDeckUser({
-        variables: { userId: userId, deckId: data.createDeck._id },
+        variables: { userId: userId, deckId: newDeckId },
       });
-      
       setFormState({
         topic: "",
         deckname: "",
       });
-      
+      onComplete(newDeckId, newDeckName);
     } catch (err) {
-      console.error(err);
+      console.error("An error occurred while creating the deck.");
     }
   };
 
@@ -59,7 +61,7 @@ const DeckForm = ({ isOpen, onClose }) => {
       <form onSubmit={handleSubmit}>
         <FormControl id="topic" isRequired>
           <FormLabel color="text.500">Choose a Topic</FormLabel>
-          <Select placeholder="Select a topic" name="topic" focusBorderColor="accent.500" onChange={handleChange}>
+          <Select name="topic" focusBorderColor="accent.500" onChange={handleChange}>
             {arrTopics.map((topic, index) => (
               <option key={index} value={topic}>
                 {topic}
