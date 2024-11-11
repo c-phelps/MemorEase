@@ -64,6 +64,9 @@ const typeDefs = `
         # Rename deck
         renameDeck (deckId: ID!, newdeckname: String!): Deck
         
+        # Edit deck
+        editDeck (deckId: ID!, deckname: String!, topic: String!): Deck
+
         # create card
         createCard (question: String!, answer: String!, link: String): Card
 

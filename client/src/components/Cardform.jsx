@@ -138,7 +138,7 @@ const CardCreationModal = ({ deckId, deckName, onComplete }) => {
             <Button colorScheme="blue" onClick={handleYes} mr={3}>
               Yes
             </Button>
-            <Button variant="ghost" onClick={handleNo}>
+            <Button variant="red" onClick={handleNo}>
               No
             </Button>
           </ModalFooter>

@@ -61,7 +61,7 @@ const DeckForm = ({ onComplete }) => {
       <form onSubmit={handleSubmit}>
         <FormControl id="topic" isRequired>
           <FormLabel color="text.500">Choose a Topic</FormLabel>
-          <Select placeholder="Select a topic" name="topic" focusBorderColor="accent.500" onChange={handleChange}>
+          <Select name="topic" focusBorderColor="accent.500" onChange={handleChange}>
             {arrTopics.map((topic, index) => (
               <option key={index} value={topic}>
                 {topic}

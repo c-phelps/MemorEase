@@ -68,3 +68,25 @@ export const ADD_CARD_TO_DECK = gql`
     }
   }
 `;
+
+export const EDIT_DECK = gql`
+  mutation EditDeck($deckId: ID!, $deckname: String!, $topic: String!) {
+    editDeck(deckId: $deckId, deckname: $deckname, topic: $topic) {
+      _id
+      deckname
+      topic
+      cards {
+        _id
+        question
+        answer
+        link
+      }
+      cardsCount
+    }
+  }
+`;
+export const DELETE_DECK = gql`
+  mutation DeleteDeck($deckId: ID!) {
+    deleteDeck(deckId: $deckId)
+  }
+`;

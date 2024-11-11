@@ -148,6 +148,23 @@ const resolvers = {
         throw new Error("Error renaming deck: " + error.message);
       }
     },
+
+    editDeck: async (parent, { deckId, deckname, topic }) => {
+      try {
+        const editDeck = await Deck.findByIdAndUpdate(
+          { _id: deckId },
+          { deckname: deckname, topic: topic },
+          { new: true }
+        ).populate("cards");
+        if (!editDeck) {
+          throw new Error("Deck not found");
+        }
+        return editDeck;
+      } catch (error) {
+        throw new Error("Error editing deck:" + error.message);
+      }
+    },
+
     // create card resolver
     createCard: async (parent, { question, answer, link }) => {
       try {
