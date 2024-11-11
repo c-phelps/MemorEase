@@ -40,6 +40,7 @@ const Signup = () => {
     <Box
       bg="background.500" // Soft White background color
       color="text.500" // Gunmetal text color for general text
+      height="100%"
       minH="100vh"
       py={12}
       px={6}
@@ -47,29 +48,19 @@ const Signup = () => {
       alignItems="center"
       justifyContent="center"
     >
+      <Box pos="absolute" top="5" left="5">
+        <Link href="/">
+          <Image src="/logo.png" alt="Logo" boxSize="40px" objectFit="contain" />
+        </Link>
+      </Box>
       <Container maxW="container.sm" centerContent>
-        <Image src="/path/to/logo.png" alt="Logo" boxSize="100px" mb={8} />{' '}
-        {/* example Logo as of now */}
-        <Heading
-          as="h2"
-          size="xl"
-          mb={4}
-          color="primary.500"
-          textAlign="center"
-        >
+        <Heading as="h2" size="xl" mb={4} color="primary.500" textAlign="center">
           Signup
         </Heading>
         <Text fontSize="lg" mb={4}>
           Signup to start creating decks and study today!
         </Text>
-        <Box
-          bg="white"
-          p={8}
-          borderRadius="md"
-          shadow="lg"
-          maxW="400px"
-          w="full"
-        >
+        <Box bg="white" p={8} borderRadius="md" shadow="lg" maxW="400px" w="full">
           <Stack spacing={6} align="stretch">
             <Input
               focusBorderColor="accent.500"
@@ -96,14 +87,7 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             {error && <Text color="red.500">{error.message}</Text>}
-            <Button
-              colorScheme="accent"
-              size="lg"
-              mt={4}
-              onClick={handleSignup}
-              width="50"
-              isLoading={isLoading}
-            >
+            <Button colorScheme="accent" size="lg" mt={4} onClick={handleSignup} width="50" isLoading={isLoading}>
               Signup!
             </Button>
             <Link to="/login">Already a user? Login instead!</Link>

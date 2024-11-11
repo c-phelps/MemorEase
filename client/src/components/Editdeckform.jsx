@@ -55,7 +55,6 @@ const EditDeck = ({ deckId, deckName, topic, onComplete }) => {
         topic: "",
         deckname: "",
       });
-      console.log(newDeckId, newDeckName);
       onComplete(newDeckId, newDeckName);
     } catch (err) {
       console.error("An error occurred while editing the deck.");
@@ -82,7 +81,13 @@ const EditDeck = ({ deckId, deckName, topic, onComplete }) => {
       <form onSubmit={handleSubmit}>
         <FormControl id="topic" isRequired>
           <FormLabel color="text.500">Choose a Topic</FormLabel>
-          <Select name="topic" focusBorderColor="accent.500" onChange={handleChange} value={formState.topic}>
+          <Select
+            name="topic"
+            placeholder="Select a topic to study"
+            focusBorderColor="accent.500"
+            onChange={handleChange}
+            value={formState.topic}
+          >
             {arrTopics.map((topic, index) => (
               <option key={index} value={topic}>
                 {topic}

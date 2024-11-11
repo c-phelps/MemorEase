@@ -5,33 +5,33 @@ import { extendTheme } from "@chakra-ui/react";
 const theme = extendTheme({
   colors: {
     primary: {
-      500: '#5C6BC0', // Indigo
+      500: "#5C6BC0", // Indigo
     },
     secondary: {
-      500: '#90A4AE', // Steel Gray
+      500: "#90A4AE", // Steel Gray
     },
     accent: {
-      500: '#81C784', // Seafoam
+      500: "#90A4AE", //"#81C784", // Seafoam
     },
     text: {
-      500: '#263238', // Gunmetal
+      500: "#263238", // Gunmetal
     },
     background: {
-      500: '#FAFAFA', // Soft White
+      500: "#FAFAFA", // Soft White
     },
   },
   styles: {
     global: {
       // Global styles for the entire app
-      'html, body': {
-        backgroundColor: 'background.500',
-        color: 'text.500',
-        fontFamily: 'Arial, sans-serif',
+      "html, body": {
+        backgroundColor: "background.500",
+        color: "text.500",
+        fontFamily: "Arial, sans-serif",
       },
       a: {
-        color: 'primary.500',
+        color: "primary.500",
         _hover: {
-          textDecoration: 'underline',
+          textDecoration: "underline",
         },
       },
     },
@@ -40,14 +40,28 @@ const theme = extendTheme({
     Button: {
       // Customizing Chakra's Button component
       baseStyle: {
-        fontWeight: 'bold',
+        fontWeight: "bold",
       },
       variants: {
         solid: {
-          bg: 'accent.500',
-          color: 'background.500',
+          bg: "accent.500",
+          color: "background.500",
           _hover: {
-            bg: 'primary.500',
+            bg: "primary.500",
+          },
+        },
+      },
+    },
+    Link: {
+      baseStyle: {
+        fontWeight: "bold",
+      },
+      variants: {
+        solid: {
+          bg: "accent.500",
+          color: "background.500",
+          _hover: {
+            bg: "primary.500",
           },
         },
       },
@@ -55,6 +69,5 @@ const theme = extendTheme({
   },
 });
 
-  //3. Export theme
-  export default theme;
-
+//3. Export theme
+export default theme;

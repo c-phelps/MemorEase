@@ -26,7 +26,7 @@ const Decks = () => {
   };
 
   const decksByTopic = data?.deckByTopic || [];
-
+  
   return (
     <Box
       bg="background.500" // Soft White background color
@@ -34,22 +34,13 @@ const Decks = () => {
       minH="100vh"
       py={12}
       px={6}
+      height="100%"
     >
-      <Heading
-        size="lg"
-        mx="auto"
-        color="primary.500"
-        textAlign="center"
-      >
+      <Heading size="lg" mx="auto" color="primary.500" textAlign="center">
         Select a topic to study!
       </Heading>
 
-      <Select
-        placeholder="Select a topic to study"
-        onChange={handleChange}
-        name="topic"
-        mb={4}
-      >
+      <Select placeholder="Select a topic to study" onChange={handleChange} name="topic" mb={4}>
         {arrTopics.map((topic, index) => (
           <option key={index} value={topic}>
             {topic}
