@@ -26,21 +26,21 @@ const Decks = () => {
   };
 
   const decksByTopic = data?.deckByTopic || [];
-  
+
   return (
-    <Box
-      bg="background.500" // Soft White background color
-      color="text.500" // Gunmetal text color for general text
-      minH="100vh"
-      py={12}
-      px={6}
-      height="100%"
-    >
-      <Heading size="lg" mx="auto" color="primary.500" textAlign="center">
+    <Box bg="background.500" color="text.500" minH="100vh" py={12} px={6} height="100%">
+      <Heading size="lg" mx="auto" color="primary.500" textAlign="center" mb={4}>
         Select a topic to study!
       </Heading>
 
-      <Select placeholder="Select a topic to study" onChange={handleChange} name="topic" mb={4}>
+      <Select
+        placeholder="Select a topic to study"
+        onChange={handleChange}
+        name="topic"
+        mb={6}
+        borderColor="gray.300"
+        _hover={{ borderColor: "gray.400" }}
+      >
         {arrTopics.map((topic, index) => (
           <option key={index} value={topic}>
             {topic}
@@ -48,37 +48,49 @@ const Decks = () => {
         ))}
       </Select>
 
-      <Box id="populateDecks" mt={4}>
+      <Box mt={4}>
         {loading && <Text>Loading...</Text>}
         {error && <Text color="red.500">Error: {error.message}</Text>}
 
-        <Heading size="md" mb={2} textAlign="left">
-          Deck name
-        </Heading>
-        <Spacer />
-        <Flex justify="start" align="center" width="full">
-          <Box p={2}>
-            <UnorderedList styleType="none" ml={0}>
-              {decksByTopic.map((deck) => (
-                <ListItem mb={2} key={deck._id}>
-                  <Flex align="center" width="full" justify="space-between">
-                    <Button as={Link} to={`/decks/${deck._id}`} width="100%" minWidth="200px" mr={2}>
-                      {deck.deckname}
-                    </Button>
-                    <Flex align="center" ml={2}>
-                      <Text size="sm" display="inline">
-                        {deck.cardsCount}
-                      </Text>
-                      <Text size="sm" display="inline" ml={1}>
-                        cards
-                      </Text>
-                    </Flex>
+        <UnorderedList styleType="none" m={0} p={0}>
+          {formState.topic === "" ? (
+            <Text>Select a topic to start studying!</Text>
+          ) : decksByTopic.length === 0 ? (
+            <Text>No decks found for this topic</Text>
+          ) : (
+            decksByTopic.map((deck) => (
+              <ListItem key={deck._id} mb={3}>
+                <Flex
+                  direction={{ base: "column", md: "row" }}
+                  align="center"
+                  justify="space-between"
+                  p={3}
+                  border="1px solid"
+                  borderColor="gray.200"
+                  borderRadius="md"
+                  bg="white"
+                  _hover={{ bg: "gray.50" }}
+                >
+                  <Button
+                    as={Link}
+                    to={`/decks/${deck._id}`}
+                    flex="1"
+                    textAlign="left"
+                    variant="outline"
+                    bg="#90A4AE"
+                    _hover={{ bg: "#5C6BC0" }}
+                    fontSize={{ base: "sm", md: "md" }}
+                  >
+                    {deck.deckname}
+                  </Button>
+                  <Flex mt={{ base: 2, md: 0 }} ml={{ md: 3 }} align="center">
+                    <Text fontSize="sm">{deck.cardsCount} cards</Text>
                   </Flex>
-                </ListItem>
-              ))}
-            </UnorderedList>
-          </Box>
-        </Flex>
+                </Flex>
+              </ListItem>
+            ))
+          )}
+        </UnorderedList>
       </Box>
     </Box>
   );

@@ -140,70 +140,72 @@ const Collection = () => {
       minH="100vh"
       maxW="100vw"
     >
-      <Box width="100%" id="flexHeader">
-        <Flex align="center" width="100%">
-          <Heading size="lg" mx="auto" textAlign="center">
-            Your Collection
-          </Heading>
-          <Spacer />
-          <Button colorScheme="teal" onClick={onOpen}>
-            Create New Deck
-          </Button>
-        </Flex>
-      </Box>
+      <Flex align="center" justify="space-between" wrap="wrap" mb={4}>
+        <Heading size="lg" textAlign={{ base: "center", md: "left" }}>
+          Your Collection
+        </Heading>
+        <Button colorScheme="teal" onClick={onOpen} size="lg">
+          Create New Deck
+        </Button>
+      </Flex>
 
-      <Box id="populateDecks" mt={4}>
+      <Box>
         {loading && <Text>Loading...</Text>}
 
         <Heading size="md" mb={2}>
           {user.username}'s Decks:
         </Heading>
 
-        <Flex justify="start">
-          <Box p={2}>
-            <UnorderedList styleType="none">
-              {decksByUser.map((deck) => (
-                <ListItem mb={2} key={deck._id}>
-                  <Flex align="center" width="full" justify="space-between">
-                    <Button as={Link} to={`/decks/${deck._id}`} width="full">
-                      {deck.deckname}
-                    </Button>
-                    <Flex align="center" ml={2}>
-                      <Text size="sm" display="inline" whiteSpace="nowrap">
-                        {deck.topic}:
-                      </Text>
-                      <Spacer />
-                      <Text size="sm" display="inline" ml={1}>
-                        {deck.cardsCount}
-                      </Text>
-                      <Text size="sm" display="inline" ml={1}>
-                        cards
-                      </Text>
-                      <Tooltip label="Edit Deck" aria-label="Edit Deck Tooltip">
-                        <IconButton
-                          icon={<EditIcon />}
-                          onClick={() => openEditModal(deck._id, deck.deckname, deck.topic)}
-                          variant="ghost"
-                          aria-label="Edit Deck"
-                          ml={2}
-                        />
-                      </Tooltip>
-                      <Tooltip label="Delete Deck" aria-label="Delete Deck Tooltip">
-                        <IconButton
-                          icon={<DeleteIcon />}
-                          onClick={() => handleDeleteCheck(deck._id)}
-                          variant="red"
-                          aria-label="Delete Deck"
-                          ml={2}
-                        />
-                      </Tooltip>
-                    </Flex>
-                  </Flex>
-                </ListItem>
-              ))}
-            </UnorderedList>
-          </Box>
-        </Flex>
+        <UnorderedList styleType="none" m={0} p={0}>
+          {decksByUser.map((deck) => (
+            <ListItem key={deck._id} mb={3}>
+              <Flex
+                direction={{ base: "column", md: "row" }}
+                align="center"
+                justify="space-between"
+                p={3}
+                border="1px solid"
+                borderColor="gray.200"
+                borderRadius="md"
+                bg="white"
+                _hover={{ bg: "gray.50" }}
+              >
+                <Button
+                  as={Link}
+                  to={`/decks/${deck._id}`}
+                  flex="1"
+                  textAlign="left"
+                  variant="outline"
+                  bg="#90A4AE"
+                  _hover={{ bg: "#5C6BC0" }}
+                  fontSize={{ base: "sm", md: "md" }}
+                >
+                  {deck.deckname}
+                  <Text as="span" fontSize="sm" color="gray.600">
+                    ({deck.topic})
+                  </Text>
+                </Button>
+                <Flex mt={{ base: 2, md: 0 }} ml={{ md: 3 }} align="center">
+                  <Text fontSize="sm">{deck.cardsCount} cards</Text>
+                  <IconButton
+                    icon={<EditIcon />}
+                    onClick={() => openEditModal(deck._id, deck.deckname, deck.topic)}
+                    aria-label="Edit Deck"
+                    ml={2}
+                    size="sm"
+                  />
+                  <IconButton
+                    icon={<DeleteIcon />}
+                    onClick={() => handleDeleteCheck(deck._id)}
+                    aria-label="Delete Deck"
+                    ml={2}
+                    size="sm"
+                  />
+                </Flex>
+              </Flex>
+            </ListItem>
+          ))}
+        </UnorderedList>
       </Box>
       {/* chakra ui to hold the modal for deck creation form */}
       <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
