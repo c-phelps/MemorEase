@@ -48,6 +48,8 @@ const CardCreationModal = ({ deckId, deckName, onComplete }) => {
     // get the createdId
     const createdId = data.createCard._id;
     // add the createdId to the array of cardIds
+    await addCardToDeck({ variables: { deckId: deckId, cards: [createdId] } });
+    
     addCardId(createdId);
     // hide the cardform and show the yes/no modal
     setShowCardForm(false);
@@ -65,7 +67,6 @@ const CardCreationModal = ({ deckId, deckName, onComplete }) => {
 
   // no is hit, add the current cardIds to the deckId
   const handleNo = async () => {
-    const { data } = await addCardToDeck({ variables: { deckId: deckId, cards: cardIds } });
     // return to parent
     setShowConfirmModal(false);
     onComplete();
