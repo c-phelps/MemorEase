@@ -22,8 +22,8 @@ function Login(props) {
       const token = data.login.token;
       Auth.login(token);
       navigate("/decks");
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.error("Mutation error:", err);
     }
   };
 
@@ -47,7 +47,7 @@ function Login(props) {
       justifyContent="center"
     >
       <Box pos="absolute" top="5" left="5">
-        <Link href="/">
+        <Link to="/">
           <Image src="/logo.png" alt="Logo" boxSize="40px" objectFit="contain" />
         </Link>
       </Box>
@@ -78,7 +78,7 @@ function Login(props) {
               focusBorderColor="accent.500"
               bg="background.500"
             />
-            {error && <Text color="red.500">The provided credentials are incorrect.</Text>}
+            {error && <Text color="red.500">{error.message}</Text>}
             <Button colorScheme="accent" size="lg" onClick={handleFormSubmit} width="full">
               Login
             </Button>

@@ -13,27 +13,50 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [addUser, { mutationError, data }] = useMutation(ADD_USER);
+  const [error, setError] = useState(null);
 
-  const [addUser, { error, data }] = useMutation(ADD_USER);
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  const handleSignup = async () => {
-    setIsLoading(true);
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
     if (!username || !email || !password) {
-      setIsLoading(false);
-      alert("All fields are required!");
+      setError({ message: "All fields are required!" });
+      console.error("All fields are required!");
       return;
     }
+
+    if (password.length < 5) {
+      setError({ message: "Password must be atleast 5 characters!" });
+      console.error("Password must be atleast 5 characters!");
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      setError({ message: "Please enter a valid email address." });
+      console.error("Please enter a valid email address.");
+      return;
+    }
+
+    setError(null);
+    setIsLoading(true);
+
     try {
       const { data } = await addUser({
         variables: { username, email, password },
       });
+
       const token = data.addUser.token;
       Auth.login(token);
+
+      navigate("/decks");
     } catch (err) {
-      console.error(err);
+      setError({ message: "An error occurred while adding the user." });
+      // console.error("Mutation error:", err);
+    } finally {
+      setIsLoading(false);
     }
-    navigate("/decks");
-    setIsLoading(false);
   };
 
   return (
@@ -49,7 +72,7 @@ const Signup = () => {
       justifyContent="center"
     >
       <Box pos="absolute" top="5" left="5">
-        <Link href="/">
+        <Link to="/">
           <Image src="/logo.png" alt="Logo" boxSize="40px" objectFit="contain" />
         </Link>
       </Box>
@@ -87,6 +110,7 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             {error && <Text color="red.500">{error.message}</Text>}
+            {mutationError && <Text color="red.500">{mutationError.error.message}</Text>}
             <Button colorScheme="accent" size="lg" mt={4} onClick={handleSignup} width="50" isLoading={isLoading}>
               Signup!
             </Button>

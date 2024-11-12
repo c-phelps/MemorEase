@@ -9,17 +9,17 @@ const resolvers = {
   Query: {
     decks: async () => {
       try {
-        const deck = await Deck.find({}).populate('cards');
+        const deck = await Deck.find({}).populate("cards");
         return deck;
       } catch (err) {
         console.error(err);
-        throw new Error('Issue fetching Decks.');
+        throw new Error("Issue fetching Decks.");
       }
     },
     users: async () => {
       try {
         const users = await User.find({}).populate({
-          path: 'decks',
+          path: "decks",
           populate: {
             path: "cards",
             model: "Card",
@@ -28,47 +28,59 @@ const resolvers = {
         return users;
       } catch (err) {
         console.error(err);
-        throw new Error('Issue fetching Users.');
+        throw new Error("Issue fetching Users.");
       }
     },
     userByID: async (parent, { id }) => {
       try {
-        const user = await User.findById(id).populate('decks');
+        const user = await User.findById(id).populate("decks");
         return user;
       } catch (err) {
         console.error(err);
-        throw new Error('Issue fetching User by ID.');
+        throw new Error("Issue fetching User by ID.");
       }
     },
     deckByTopic: async (parent, { topic }) => {
       try {
         // return deck by topic populate cards field
-        const deck = await Deck.find({ topic: topic }).populate('cards');
+        const deck = await Deck.find({ topic: topic }).populate("cards");
         return deck;
       } catch (err) {
         console.error(err);
-        throw new Error('Issue fetching Decks by topic.');
+        throw new Error("Issue fetching Decks by topic.");
       }
     },
     deckById: async (parent, { id }) => {
       try {
-        const deck = await Deck.findById(id).populate('cards');
+        const deck = await Deck.findById(id).populate("cards");
         return deck;
       } catch (err) {
         console.error(err);
-        throw new Error('Issue fetching Deck by ID.');
+        throw new Error("Issue fetching Deck by ID.");
       }
     },
   },
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
       try {
+        const existingUser = await User.findOne({
+          $or: [{ username: username }, { email: email }],
+        });
+        if (existingUser) {
+          // Determine the specific error message based on what matches
+          if (existingUser.username === username) {
+            throw new Error("Username already exists! Try a different name.");
+          }
+          if (existingUser.email === email) {
+            throw new Error("Email already exists! Try a different email.");
+          }
+        }
         const user = await User.create({ username, email, password });
         const token = signToken(user);
         return { token, user };
       } catch (err) {
-        console.error(err);
-        throw new Error("Issue adding new user.");
+        console.error("Error in adding user:", err.message);
+        throw err;
       }
     },
     login: async (parent, { username, password }) => {
@@ -86,8 +98,8 @@ const resolvers = {
         const token = signToken(user);
         return { token, user };
       } catch (err) {
-        console.error(err);
-        throw new Error("Issue logging in.");
+        console.error("Error logging in user:", err.message);
+        throw err;
       }
     },
     // Resolver for creating a new deck
